@@ -1,0 +1,45 @@
+:root{
+    --navcolor:white;
+    --navfont:black;
+    --green:#06C167;
+    --box-shadow:0 .5rem 1rem rgba(0,0,0.1)
+  }
+header{
+    width: 100%;
+    height: 80px;
+    background-color: var(--navcolor);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 100px;
+  }
+  .logo{
+    font-size: 28px;
+    color:var(--navfont);
+  }
+  .hamburger{
+    display:none;
+  }
+  .nav-bar ul{
+    display: flex;
+  }
+  .nav-bar ul li a{
+     display: block;
+     color: var(--navfont);
+     font-size: 20px ;
+     padding:10px 25px;
+     border-radius: 50px;
+     transition: 0.2s;
+     margin: 0 5px;
+  
+  }
+  .nav-bar ul li a:hover{
+    color: var(--navcolor);
+    background-color: var(--navfont);
+    border-radius: 50px;
+  }
+  .nav-bar ul li a.active{
+    color:var(--navcolor);
+    background-color: var(--navfont);
+  
+  }

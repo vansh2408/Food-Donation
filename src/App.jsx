@@ -1,32 +1,44 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
 import Login from "./components/Login";
 import RootLayout from "./components/RootLayout";
 import MessPage from "./components/MessPage";
 import RestaurantPage from "./components/RestaurantPage";
 import DonateForm from "./components/DonateForm";
 import { lazy } from "react";
+import About from "./components/about";
+import Contact from "./components/contact";
+import { useAuth } from "./AuthContext";
 
 function App() {
+    const {user, userType} = useAuth();
     const router = createBrowserRouter([
         {
             path: "",
-            element: <Login />,
+            element: user ? <Navigate to={userType === "NGO" ? "/domain/ngo" : "/domain/mess"} />: <Login/>,
         },
         {
             path: "domain",
-            element: <RootLayout />,
+            element: user ? <RootLayout /> : <Navigate to="/"/>,
             children: [
                 {
                     path: "mess",
-                    element: <MessPage />,
+                    element: userType === "MESS" ? <MessPage /> : <Navigate to="/domain/ngo"/>,
                 },
                 {
                     path: "mess/donate",
-                    element: <DonateForm/>
+                    element: userType === "MESS" ? <DonateForm/> : <Navigate to="/domain/ngo"/>
                 },
                 {
-                    path: "restaurant",
-                    element: <RestaurantPage />,
+                    path: "ngo",
+                    element: userType === "NGO" ? <RestaurantPage /> : <Navigate to="/domain/mess"/>,
+                },
+                {
+                    path: "about",
+                    element: <About />
+                },
+                {
+                    path: "contact",
+                    element: <Contact />
                 },
             ],
         },
